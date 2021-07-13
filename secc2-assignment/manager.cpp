@@ -1,11 +1,16 @@
 #include "manager.h"
+#include <QUrlQuery>
 
 Manager::Manager(QObject *parent) : QObject(parent)
 {
+    QUrlQuery query;
+    query.addQueryItem("page", "2");
+
     QUrl url;
     url.setScheme("https");
-    url.setHost("postman-echo.com");
-    url.setPath("/get");
+    url.setHost("reqres.in");
+    url.setPath("/api/users");
+    url.setQuery(query);
 
     QNetworkRequest request;
     request.setUrl(url);

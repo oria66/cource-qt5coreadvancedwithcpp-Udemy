@@ -14,3 +14,14 @@ SOURCES += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../LibraryForSecc3/release/ -lLibraryForSecc3
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../LibraryForSecc3/debug/ -lLibraryForSecc3
+
+INCLUDEPATH += $$PWD/../LibraryForSecc3
+DEPENDPATH += $$PWD/../LibraryForSecc3
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LibraryForSecc3/release/libLibraryForSecc3.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LibraryForSecc3/debug/libLibraryForSecc3.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LibraryForSecc3/release/LibraryForSecc3.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../LibraryForSecc3/debug/LibraryForSecc3.lib
